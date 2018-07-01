@@ -1,7 +1,16 @@
 (ns slackroid.core
-  (:gen-class))
+  (:require
+   [clj-slack-client.core :as slack]))
+
+(defn handle-slack-event
+  [event]
+  (println "event:" event))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (slack/connect "API Token" handle-slack-event)
+  (println "bot running...")
+  (loop []
+    (println "...")
+    (Thread/sleep 5000)
+    (recur)))
